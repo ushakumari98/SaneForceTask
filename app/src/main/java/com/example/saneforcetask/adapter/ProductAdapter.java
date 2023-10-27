@@ -2,6 +2,9 @@ package com.example.saneforcetask.adapter;
 
 import android.app.Activity;
 import android.content.Context;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -53,6 +56,16 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
           mQuantity++;
 
           holder.quantityEditText.setText(String.valueOf(mQuantity));
+
+            /*
+             *     Price * Qty
+             */
+
+            String price = holder.priceEditTText.getText().toString().trim();
+
+            Integer totalAmount = Integer.parseInt(price ) * mQuantity;
+
+            holder.totalEditText.setText(String.valueOf(totalAmount)); // see whatsapp
         });
 
         holder.decreament.setOnClickListener(view -> {
@@ -67,7 +80,9 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
             mQuantity--;
 
             holder.quantityEditText.setText(String.valueOf(mQuantity));
+
         });
+
     }
 
     @Override
@@ -78,7 +93,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
     public class ViewHolder extends RecyclerView.ViewHolder {
         private Spinner spinner;
         private Button increament, decreament;
-        private TextView priceEditTText, quantityEditText;
+        private TextView priceEditTText, quantityEditText, totalEditText;
 
         public ViewHolder(View itemView) {
             super(itemView);
@@ -87,6 +102,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
             priceEditTText = itemView.findViewById(R.id.price);
             quantityEditText = itemView.findViewById(R.id.quantity);
             decreament = itemView.findViewById(R.id.decrementButton);
+            totalEditText = itemView.findViewById(R.id.totalEditText);
         }
     }
 }
