@@ -1,5 +1,7 @@
 package com.example.saneforcetask.adapter;
 
+import android.app.Activity;
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,14 +11,19 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.saneforcetask.R;
-import com.example.saneforcetask.model.Product;
+import com.example.saneforcetask.model.Products;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHolder> {
-    private List<Product> productList;
+    private Context context;
+    private Activity activity;
+    private List<Products> productList;
 
-    public ProductAdapter(List<Product> productList) {
+    public ProductAdapter(Context context, Activity activity , ArrayList<Products> productList) {
+        this.context = context;
+        this.activity = activity;
         this.productList = productList;
     }
 
@@ -29,8 +36,8 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        Product product = productList.get(position);
-        holder.bind(product);
+        Products product = productList.get(position);
+
     }
 
     @Override
@@ -39,20 +46,10 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        private EditText productQuantityTextView;
-        private EditText productAddTextView;
-        private EditText totalTextView;
 
         public ViewHolder(View itemView) {
             super(itemView);
-            productQuantityTextView = itemView.findViewById(R.id.productQuantityTextView);
-            productAddTextView= itemView.findViewById(R.id.productAddTextView);
-            totalTextView= itemView.findViewById(R.id.totalTextView);
-        }
 
-        public void bind(Product product) {
-            productQuantityTextView.setText(product.getName());
-            totalTextView.setText("Rate: " + product.getQuantity());
         }
     }
 }

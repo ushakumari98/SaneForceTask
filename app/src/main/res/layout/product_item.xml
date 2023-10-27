@@ -1,47 +1,89 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@id/productSpinner"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="horizontal">
+    <Spinner
+        android:id="@+id/productSpinner"
+        android:layout_width="146dp"
+        android:layout_marginTop="5dp"
+        android:layout_height="0dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
+    <Button
+        android:id="@+id/deleteButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="160dp"
+        android:layout_marginTop="16dp"
+        android:backgroundTint="@color/blue"
+        android:text="Delete"
+        app:layout_constraintStart_toEndOf="@+id/productSpinner"
+        app:layout_constraintTop_toTopOf="parent" />
 
+    <EditText
+        android:id="@+id/productAddTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:text=" 0.0"
+        android:digits=""
+        android:textAlignment="center"
+        android:inputType=""
+        app:layout_constraintBottom_toBottomOf="@+id/incrementButton"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/incrementButton" />
 
+    <Button
+        android:id="@+id/incrementButton"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginStart="18dp"
+        android:layout_marginTop="80dp"
+        android:text="+"
+        android:backgroundTint="@color/blue"
+        app:layout_constraintStart_toEndOf="@+id/productAddTextView"
+        app:layout_constraintTop_toBottomOf="@+id/productSpinner" />
+
+    <EditText
+        android:id="@+id/productQuantityTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginStart="24dp"
+        android:text="0 "
+        android:textAlignment="center"
+        app:layout_constraintStart_toEndOf="@+id/incrementButton"
+        app:layout_constraintTop_toTopOf="@+id/incrementButton" />
+
+    <Button
+        android:id="@+id/decrementButton"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="100dp"
+        android:text="-"
+        android:textStyle="bold"
+        android:backgroundTint="@color/blue"
+        app:layout_constraintBottom_toBottomOf="@+id/productQuantityTextView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/productQuantityTextView"
+        app:layout_constraintTop_toTopOf="@+id/productQuantityTextView" />
+
+    <EditText
+        android:id="@+id/totalTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginEnd="16dp"
+        android:text="0.0"
+        android:textAlignment="center"
+        app:layout_constraintBottom_toBottomOf="@+id/decrementButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/decrementButton"
+        app:layout_constraintVertical_bias="0.0" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <!--<?xml version="1.0" encoding="utf-8"?>-->
-<!--<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
-<!--    xmlns:tools="http://schemas.android.com/tools"-->
-<!--    android:layout_width="match_parent"-->
-<!--    android:layout_height="match_parent"-->
-<!--    xmlns:app="http://schemas.android.com/apk/res-auto">-->
-
-
-<!--    <Button-->
-<!--        android:id="@+id/add_button"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_below="@id/product_dropdown"-->
-<!--        android:layout_marginBottom="28dp"-->
-<!--        android:text="Del"-->
-<!--        app:layout_constraintBottom_toTopOf="@+id/product_dropdown"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintHorizontal_bias="0.863"-->
-<!--        app:layout_constraintStart_toStartOf="parent" />-->
-
-<!--    <Spinner-->
-<!--        android:id="@+id/product_dropdown"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="0dp"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintHorizontal_bias="0.051"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        tools:layout_editor_absoluteY="197dp"-->
-<!--        tools:ignore="MissingConstraints" />-->
-
-
-<!--</androidx.constraintlayout.widget.ConstraintLayout>-->
