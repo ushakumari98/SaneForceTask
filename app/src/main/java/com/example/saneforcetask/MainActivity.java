@@ -33,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
     private ActivityMainBinding binding;
 
     private ArrayList<Products> productsArrayList;
-    private ProductAdapter adapter;
+    private ProductAdapter  productAdapter;
     private SQLiteDatabase database;
     private DatabaseManager databaseManager;
 
@@ -59,7 +59,7 @@ public class MainActivity extends AppCompatActivity {
         binding.recyclerView.setHasFixedSize(true);
         binding.recyclerView.setLayoutManager(linearLayoutManager);
         binding.recyclerView.setItemViewCacheSize(20);
-        ProductAdapter productAdapter = new ProductAdapter(getApplicationContext(), this, productsArrayList);
+        productAdapter = new ProductAdapter(getApplicationContext(), productsArrayList);
         binding.recyclerView.setAdapter(productAdapter);
     }
 
@@ -68,11 +68,16 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 String dbTextProductName = "Product 1";
-                double dbPrice = 0.0;
-                int dbQuantity = 0;
-                double dbTotalAmount = dbPrice * dbQuantity;
+                String dbPrice = "0";
+                String dbQuantity = "0";
+                String dbTotalAmount = "0";
 
                 databaseManager.addProducts(dbTextProductName,dbPrice,dbQuantity,dbTotalAmount);
+
+                Products products = new Products();
+                products.setProduct_name(dbTextProductName);
+               productsArrayList.add(products);
+                productAdapter.notifyDataSetChanged();
                 Log.e("add__", "Product added");
             }
         });

@@ -2,4 +2,13 @@
     <string name="app_name">SaneForceTask</string>
     <string name="add">ADD</string>
     <string name="dashboard">Dashboard</string>
+    <string name="delete">Delete</string>
+
+    <string-array name="products_array">
+        <item>Select</item>
+        <item>Product 1</item>
+        <item>Product 2</item>
+        <item>Product 3</item>
+        <item>Product 4</item>
+    </string-array>
 </resources>

@@ -5,7 +5,11 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -21,9 +25,8 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
     private Activity activity;
     private List<Products> productList;
 
-    public ProductAdapter(Context context, Activity activity , ArrayList<Products> productList) {
+    public ProductAdapter(Context context, ArrayList<Products> productList) {
         this.context = context;
-        this.activity = activity;
         this.productList = productList;
     }
 
@@ -38,6 +41,33 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Products product = productList.get(position);
 
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(context,
+                R.array.products_array, android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        holder.spinner.setAdapter(adapter);
+
+        holder.increament.setOnClickListener(view -> {
+          String quantity = holder.quantityEditText.getText().toString().trim();
+
+          Integer mQuantity = Integer.parseInt(quantity);
+          mQuantity++;
+
+          holder.quantityEditText.setText(String.valueOf(mQuantity));
+        });
+
+        holder.decreament.setOnClickListener(view -> {
+
+            String quantity = holder.quantityEditText.getText().toString().trim();
+
+            if (quantity.equals("0")){
+                return;
+            }
+
+            Integer mQuantity = Integer.parseInt(quantity);
+            mQuantity--;
+
+            holder.quantityEditText.setText(String.valueOf(mQuantity));
+        });
     }
 
     @Override
@@ -46,10 +76,17 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
+        private Spinner spinner;
+        private Button increament, decreament;
+        private TextView priceEditTText, quantityEditText;
 
         public ViewHolder(View itemView) {
             super(itemView);
-
+            spinner = itemView.findViewById(R.id.productSpinner);
+            increament = itemView.findViewById(R.id.incrementButton);
+            priceEditTText = itemView.findViewById(R.id.price);
+            quantityEditText = itemView.findViewById(R.id.quantity);
+            decreament = itemView.findViewById(R.id.decrementButton);
         }
     }
 }

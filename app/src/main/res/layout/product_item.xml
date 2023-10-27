@@ -1,89 +1,103 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="horizontal">
+    android:background="@color/white">
     <Spinner
         android:id="@+id/productSpinner"
-        android:layout_width="146dp"
-        android:layout_marginTop="5dp"
-        android:layout_height="0dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_width="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"/>
 
     <Button
         android:id="@+id/deleteButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="160dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="10dp"
+        android:textColor="@color/white"
+        android:layout_marginEnd="10dp"
+        android:layout_alignParentEnd="true"
         android:backgroundTint="@color/blue"
-        android:text="Delete"
-        app:layout_constraintStart_toEndOf="@+id/productSpinner"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:text="@string/delete" />
 
-    <EditText
-        android:id="@+id/productAddTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        android:text=" 0.0"
-        android:digits=""
-        android:textAlignment="center"
-        android:inputType=""
-        app:layout_constraintBottom_toBottomOf="@+id/incrementButton"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/incrementButton" />
-
-    <Button
-        android:id="@+id/incrementButton"
-        android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        android:layout_marginStart="18dp"
-        android:layout_marginTop="80dp"
-        android:text="+"
-        android:backgroundTint="@color/blue"
-        app:layout_constraintStart_toEndOf="@+id/productAddTextView"
-        app:layout_constraintTop_toBottomOf="@+id/productSpinner" />
-
-    <EditText
-        android:id="@+id/productQuantityTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        android:layout_marginStart="24dp"
-        android:text="0 "
-        android:textAlignment="center"
-        app:layout_constraintStart_toEndOf="@+id/incrementButton"
-        app:layout_constraintTop_toTopOf="@+id/incrementButton" />
-
-    <Button
-        android:id="@+id/decrementButton"
-        android:layout_width="wrap_content"
-        android:layout_height="0dp"
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
         android:layout_marginStart="10dp"
-        android:layout_marginEnd="100dp"
-        android:text="-"
-        android:textStyle="bold"
-        android:backgroundTint="@color/blue"
-        app:layout_constraintBottom_toBottomOf="@+id/productQuantityTextView"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/productQuantityTextView"
-        app:layout_constraintTop_toTopOf="@+id/productQuantityTextView" />
+        android:layout_marginEnd="10dp"
+        android:layout_below="@id/productSpinner">
 
-    <EditText
-        android:id="@+id/totalTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        android:layout_marginEnd="16dp"
-        android:text="0.0"
-        android:textAlignment="center"
-        app:layout_constraintBottom_toBottomOf="@+id/decrementButton"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/decrementButton"
-        app:layout_constraintVertical_bias="0.0" />
+        <EditText
+            android:id="@+id/price"
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:hint="0"
+            android:maxLength="6"
+            android:digits="1234567890."
+            android:textAlignment="center"
+            android:inputType="number"
+         />
+
+        <Button
+            android:id="@+id/incrementButton"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@drawable/button_bg"
+            android:textColor="@color/white"
+            android:layout_toRightOf="@id/price"
+            android:layout_marginStart="10dp"
+            android:text="+"
+         />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+           android:layout_toRightOf="@id/incrementButton">
+
+            <EditText
+                android:id="@+id/quantity"
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:text="0"
+                android:digits="1234567890."
+                android:maxLength="6"
+                android:textAlignment="center"
+                />
+
+            <Button
+                android:id="@+id/decrementButton"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:text="-"
+                android:textColor="@color/white"
+                android:background="@drawable/button_bg"
+                android:textStyle="bold"
+                android:layout_marginStart="10dp"
+                />
+
+        </LinearLayout>
 
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+
+        <EditText
+            android:id="@+id/totalTextView"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+           android:layout_alignParentEnd="true"
+            android:layout_marginStart="10dp"
+            android:hint="0"
+            android:digits="1234567890."
+            android:maxLength="8"
+            android:inputType="number"
+            android:textAlignment="center" />
+    </RelativeLayout>
+
+</RelativeLayout>
 
