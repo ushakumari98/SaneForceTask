@@ -21,7 +21,6 @@ public class DatabaseManager {
         context = c;
     }
 
-
     public void addProducts(String product_name, String dbPrice, String dbQuantity, String dbTotalAmount){
 
         String INSERT = "INSERT INTO " + TABLE_NAME + " (" +
@@ -34,13 +33,11 @@ public class DatabaseManager {
 
         SQLiteStatement insert = database.compileStatement(INSERT);
 
-        // consider id column index is 0 next colum 1 ...2..3// then what about index 0 value
         insert.bindString(1, product_name);
         insert.bindString(2, String.valueOf(dbPrice));
         insert.bindString(3, String.valueOf(dbQuantity));
         insert.bindString(4, String.valueOf(dbTotalAmount));
-        insert.executeInsert(); // works but not updated list in UI. any idea? without adding data how it will display will get empty only!
-        // why im add after not loaded list?
+        insert.executeInsert();
     }
 
     public DatabaseManager open() throws SQLException{

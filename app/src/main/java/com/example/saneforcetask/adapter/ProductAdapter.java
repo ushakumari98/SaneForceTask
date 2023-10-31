@@ -1,5 +1,6 @@
 package com.example.saneforcetask.adapter;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.text.Editable;
@@ -41,8 +42,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        Products product = productList.get(position);
+    public void onBindViewHolder(@NonNull ViewHolder holder, @SuppressLint("RecyclerView") int position) {
 
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(context,
                 R.array.products_array, android.R.layout.simple_spinner_item);
@@ -50,39 +50,52 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
         holder.spinner.setAdapter(adapter);
 
         holder.increament.setOnClickListener(view -> {
-          String quantity = holder.quantityEditText.getText().toString().trim();
-
-          Integer mQuantity = Integer.parseInt(quantity);
-          mQuantity++;
-
-          holder.quantityEditText.setText(String.valueOf(mQuantity));
-
-            /*
-             *     Price * Qty
-             */
-
-            String price = holder.priceEditTText.getText().toString().trim();
-
-            Integer totalAmount = Integer.parseInt(price ) * mQuantity;
-
-            holder.totalEditText.setText(String.valueOf(totalAmount)); // see whatsapp
+            try {
+                String quantity = holder.quantityEditText.getText().toString().trim();
+                Integer mQuantity = Integer.parseInt(quantity);
+                mQuantity++;
+                holder.quantityEditText.setText(String.valueOf(mQuantity));
+                String price = holder.priceEditTText.getText().toString().trim();
+                Integer totalAmount = Integer.parseInt(price) * mQuantity;
+                holder.totalEditText.setText(String.valueOf(totalAmount));
+            } catch (NumberFormatException e) {
+                Log.e("IncrementButton", "Error: " + e.getMessage());
+            }
         });
 
         holder.decreament.setOnClickListener(view -> {
-
             String quantity = holder.quantityEditText.getText().toString().trim();
 
-            if (quantity.equals("0")){
-                return;
+            if (!quantity.isEmpty()) {
+                int mQuantity = Integer.parseInt(quantity);
+
+                if (mQuantity > 0) {
+                    mQuantity--; // Decrease the quantity
+                    holder.quantityEditText.setText(String.valueOf(mQuantity)); // Update the EditText
+
+                    String price = holder.priceEditTText.getText().toString().trim();
+                    int totalAmount = Integer.parseInt(price) * mQuantity;
+
+                    holder.totalEditText.setText(String.valueOf(totalAmount)); // Update the total amount
+                }
             }
-
-            Integer mQuantity = Integer.parseInt(quantity);
-            mQuantity--;
-
-            holder.quantityEditText.setText(String.valueOf(mQuantity));
-
         });
 
+        holder.delete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Products product = productList.get(position); // Get the product associated with this row
+                removeProduct(product);
+            }
+
+            private void removeProduct(Products product) {
+                int position = productList.indexOf(product);
+                if (position != -1) {
+                    productList.remove(position); // Remove the product
+                    notifyItemRemoved(position); // Notify the adapter that an item was removed
+                }
+            }
+        });
     }
 
     @Override
@@ -92,7 +105,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         private Spinner spinner;
-        private Button increament, decreament;
+        private Button increament, decreament, delete;
         private TextView priceEditTText, quantityEditText, totalEditText;
 
         public ViewHolder(View itemView) {
@@ -103,6 +116,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
             quantityEditText = itemView.findViewById(R.id.quantity);
             decreament = itemView.findViewById(R.id.decrementButton);
             totalEditText = itemView.findViewById(R.id.totalEditText);
+            delete = itemView.findViewById(R.id.deleteButton);
         }
     }
 }

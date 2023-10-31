@@ -9,7 +9,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     static final String DB_NAME = "product_database";
     static final int DB_VERSION = 1;
     public static final String TABLE_NAME = "products";
-
     public static final String ID_COL = "id";
     public static final String PRODUCT_NAME_COL = "product_name";
     public static final String PRICE_COL = "price";
